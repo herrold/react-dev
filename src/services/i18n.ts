@@ -1,13 +1,14 @@
 import * as i18n from 'i18next';
-import * as XHR from 'i18next-xhr-backend';
-import * as LanguageDetector from 'i18next-browser-languagedetector';
+// import * as XHR from 'i18next-xhr-backend';
+// import * as LanguageDetector from 'i18next-browser-languagedetector';
+import * as SyncBackend from 'i18next-sync-fs-backend';
 
 const instance: i18n.i18n = i18n
-    .use(XHR)
-    .use(LanguageDetector)
+    .use(SyncBackend)
     .init({
+        initImmediate: false,
         backend: {
-            loadPath: '/locales/{{lng}}.json'
+            loadPath: 'public/locales/{{lng}}.json'
         },
         fallbackLng: 'en',
 

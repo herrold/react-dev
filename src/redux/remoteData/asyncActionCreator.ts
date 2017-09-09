@@ -9,6 +9,7 @@ import { issuesActionCreator, callCountActionCreator } from './index';
 import { clearContactIndexes, completeIssueActionCreator } from '../callState/';
 import { ApplicationState } from '../root';
 import { LocationUiState } from '../../common/model';
+import { supportingLocalStorage } from '../../services/localStorage';
 /**
  * Timer for calling fetchLocationByIP() if
  * fetchBrowserGeolocation() fails or times out.
@@ -173,12 +174,12 @@ export const startup = () => {
 
 const migrateLegacyCompletedIssues = (dispatch: Dispatch<ApplicationState>) => {
   const LEGACY_COMPLETED_ISSUES_KEY = 'org.5calls.completed';
-  const legacyCompletedIssues = localStorage.getItem(LEGACY_COMPLETED_ISSUES_KEY);
+  const legacyCompletedIssues = supportingLocalStorage().getItem(LEGACY_COMPLETED_ISSUES_KEY);
   if (legacyCompletedIssues) {
     const ids = JSON.parse(legacyCompletedIssues);
     ids.forEach((id) => {
       dispatch(completeIssueActionCreator(id));
     });
-    localStorage.removeItem(LEGACY_COMPLETED_ISSUES_KEY);
+    supportingLocalStorage().removeItem(LEGACY_COMPLETED_ISSUES_KEY);
   }
 };
