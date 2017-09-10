@@ -7,6 +7,7 @@ import { SidebarHeader, Sidebar, Footer, Header } from './index';
 
 interface Props {
   readonly children?: {};
+  readonly extraComponent?: {};
   readonly issueId: string;
   readonly issues: Issue[];
   readonly currentIssue?: Issue;
@@ -44,6 +45,7 @@ const Layout: React.StatelessComponent<Props> = (props: Props) => (
         {props.children}
       </main>
     </div>
+    {props.extraComponent}
     <Footer
       t={i18n.t}
     />
