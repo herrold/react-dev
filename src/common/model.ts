@@ -87,6 +87,7 @@ export interface Group {
   name: string;
   description: string;
   totalCalls: number;
+  photoURL: string;
 }
 
 /**
